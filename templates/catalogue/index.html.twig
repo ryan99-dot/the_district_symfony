@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - The District
+{% endblock %}
+
+{% block body %}
+	<video id="background_video" autoplay loop muted>
+		<source src="{{ asset('assets/videos/entete_video.mp4#t=3')}}">
+	</video>
+	<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get" id="champ_recherche" class="justify-content-center align-items-end">
+		<label for="recherche"></label>
+		<input type="search" id="recherche" name="recherche" placeholder="Recherche..." class="border-0 rounded-5 text-center position-relative fs-4">
+	</form>
+	<div id="banniere_mobile"></div>
+</header>
+<section>
+	<h2 class="my-5" id="titre_cat">Catégories</h2>
+	<svg viewbox="40 0 500 100" xmlns="http://www.w3.org/2000/svg">
+		<defs>
+			<radialGradient id="monDegrade2">
+				<stop offset="20%" stop-color="rgba(0,0,0,60%)"/>
+				<stop offset="60%" stop-color="rgba(0,0,0,40%)"/>
+				<stop offset="100%" stop-color="rgba(0,0,0,0%)"/>
+			</radialGradient>
+		</defs>
+		<ellipse cx="100" cy="50" rx="200" ry="35" fill="url('#monDegrade2')"/>
+	</svg>
+	<div id="categories" class="d-flex">
+		{% for categorie in categories %}
+			{% if loop.index0 is divisible by(2) %}
+				<a href="{{ path('app_plats_categorie', {id: categorie.id}) }}" class="up" id="{{ categorie.libelle }}">
+					<p class="align-items-center justify-content-center">
+						{{ categorie.libelle }}
+					</p>
+				</a>
+			{% else %}
+				<a href="{{ path('app_plats_categorie', {id: categorie.id}) }}" class="down" id="{{ categorie.libelle }}">
+					<p class="align-items-center justify-content-center">
+						{{ categorie.libelle }}
+					</p>
+				</a>
+			{% endif %}
+		{% endfor %}
+	</div>
+</section>
+
+<div id="separation_leg" class="my-5"></div>
+
+<section>
+	<h2 class="my-5" id="titre_plat">Plats du jour</h2>
+	<svg viewbox="40 0 500 100" xmlns="http://www.w3.org/2000/svg">
+		<defs>
+			<radialGradient id="monDegrade3">
+				<stop offset="20%" stop-color="rgba(0,0,0,60%)"/>
+				<stop offset="60%" stop-color="rgba(0,0,0,40%)"/>
+				<stop offset="100%" stop-color="rgba(0,0,0,0%)"/>
+			</radialGradient>
+		</defs>
+		<ellipse cx="100" cy="50" rx="200" ry="35" fill="url('#monDegrade3')"/>
+	</svg>
+	<div id="plats" class="my-1">
+		{% for plat in plats %}
+			<a href="{{ path('app_plats', {id: plat.id}) }}">
+				<img src="{{ asset('assets/images/food/' ~ plat.image) }}" alt="{{ plat.libelle }}" class="object-fit-cover" id="plat_jour{{ loop.index }}">
+			</a>
+		{% endfor %}
+	</div>
+</section>{% endblock %}

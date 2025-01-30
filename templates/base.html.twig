@@ -1,17 +1,169 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<script src="https://kit.fontawesome.com/694d251a11.js" crossorigin="anonymous"></script>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ asset(app.current_route == 'accueil' ? 'assets/css/index.css' : 'assets/css/pages.css')}}">
+		<link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Dekko&family=Farsan&family=Geostar+Fill&family=Graduate&family=Griffy&family=Gwendolyn:wght@400;700&family=Indie+Flower&family=Julius+Sans+One&family=Love+Light&family=Mina:wght@400;700&family=Modern+Antiqua&family=Norican&family=Nothing+You+Could+Do&display=swap" rel="stylesheet"> {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		<header>
+			<nav
+				class="navbar navbar-expand-lg sticky-top d-flex justify-content-between p-0 shadow">
+				<!-- Logos -->
+				<img src="{{ asset('assets/images/the_district_brand/logo_transparent.png') }}" alt="Logo The District" id="logo_desktop">
+				<img
+				src="{{ asset('assets/images/the_district_brand/logo.png') }}" alt="Logo The District" id="logo_mobile">
+
+				<!-- Navigation principale -->
+				<ul
+					class="navbar-nav col justify-content-around">
+
+					<!-- Accueil -->
+					<li class="nav-item border-end border-white d-flex justify-content-center align-items-center">
+						<a href="{{ url('accueil')}}" class="nav-link {{ app.current_route == 'accueil' ? 'active text-white text-decoration-underline' : ''}} fs-4">Accueil</a>
+					</li>
+
+					<!-- Catégories -->
+					<li class="nav-item border-end border-white d-flex justify-content-center align-items-center">
+						<a href="{{ url('app_categories') }}" class="nav-link {{ app.current_route == 'app_categories' ? 'active text-white text-decoration-underline' : ''}} fs-4">Catégories</a>
+					</li>
+
+					<!-- Plats -->
+					<li class="nav-item border-end border-white d-flex justify-content-center align-items-center">
+						<a href="{{ url('app_plats')}}" class="nav-link {{ app.current_route starts with 'app_plats' ? 'active text-white text-decoration-underline' : ''}} fs-4">Plats</a>
+					</li>
+
+					<!-- Contact -->
+					<li class="nav-item d-flex justify-content-center align-items-center">
+						<a href="{{ url('app_contact')}}" class="nav-link {{ app.current_route == 'app_contact' ? 'active text-white text-decoration-underline' : ''}} fs-4">Contact</a>
+					</li>
+				</ul>
+
+				<!-- Image supplémentaire -->
+				<img
+				id="img_nav" src="{{ asset('assets/images/bg_rd.png') }}" alt="Plusieurs plats sur fond bleu">
+
+
+				<!-- Sidenav -->
+				<div id="mySidenav" class="sidenav">
+					<div class="d-flex justify-content-between align-items-center mx-5">
+						<a href="{{ url('app_panier') }}">
+							<i class="fa-solid fa-basket-shopping fs-1"></i>
+						</a>
+						<a id="closeBtn" href="#" class="close">×</a>
+					</div>
+					<!-- Liens du sidenav -->
+					<ul>
+						<li>
+							<a href="{{ url('accueil') }}">Accueil</a>
+						</li>
+						<li>
+							<a href="{{ url('app_categories') }}">Catégories</a>
+						</li>
+						<li>
+							<a href="{{ url('app_plats') }}">Plats</a>
+						</li>
+						<li>
+							<a href="{{ url('app_contact') }}">Contact</a>
+						</li>
+					</ul>
+
+
+					<!-- Réseaux sociaux -->
+					<div id="reseaux_mobile" class="d-flex justify-content-around mt-4">
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-facebook-f"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-instagram"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-linkedin-in"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-pinterest-p"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-youtube"></i>
+						</a>
+					</div>
+
+					<!--Politique de confidentialité et mentions légales
+																														                <div id="pol_mention" class="d-flex justify-content-around mt-3">
+																														                    <a href="<?= $file == 'index.php' ? 'php/politique_de_confidentialite.php' : 'politique_de_confidentialite.php' ?>" class="text-decoration-none text-center fs-5">Politique de confidentialité</a>
+																														                    <a href="<?= $file == 'index.php' ? 'php/mentions_legales.php' : 'mentions_legales.php' ?>" class="text-decoration-none fs-5">Mentions légales</a>
+																														                </div>
+																														            </div>-->
+
+					<!-- Burger menu -->
+					<a href="#" id="openBtn">
+						<span class="burger-icon">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+					</a>
+				</nav>
+
+				{% block body %}{% endblock %}
+
+				<!-- Separations -->
+				{% if app.current_route == 'accueil' or app.current_route starts with 'app_plats' %}
+					{% set separation_id = 'separation_ass' %}
+				{% elseif app.current_route == 'app_categories' %}
+					{% set separation_id = 'separation_leg' %}
+				{% else %}
+					{% set separation_id = 'separation_tab' %}
+				{% endif %}
+				<div id="{{ separation_id }}"></div>
+
+				<footer
+					class="justify-content-around mb-3">
+					<!-- <a href="<?= $file == 'index.php' ? 'php/politique_de_confidentialite.php' : 'politique_de_confidentialite.php' ?>" class="text-decoration-none text-black text-center d-flex align-items-center justify-content-center" style="width: 24%;">Politique de confidentialité</a> -->
+
+					<div class="justify-content-center" style="width: 50%;">
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-facebook-f me-5 rounded-circle d-flex justify-content-center align-items-center border border-3 border-dark"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-instagram me-5 rounded-circle d-flex justify-content-center align-items-center border border-3 border-dark"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-linkedin-in me-5 rounded-circle d-flex justify-content-center align-items-center border border-3 border-dark"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-pinterest-p me-5 rounded-circle d-flex justify-content-center align-items-center border border-3 border-dark"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="fa-brands fa-youtube rounded-circle d-flex justify-content-center align-items-center border border-3 border-dark"></i>
+						</a>
+					</div>
+					<!-- <a href="<?= $file == 'index.php' ? 'php/mentions_legales.php' : 'mentions_legales.php' ?>" class="text-decoration-none text-black d-flex align-items-center justify-content-center" style="width: 24%;">Mentions légales</a> -->
+				</footer>
+
+				<script src="{{ asset('assets/javascript/menu_burger.js') }}"></script>
+				<script src="{{ asset('assets/javascript/plats.js') }}"></script>
+				<script src="{{ asset('assets/javascript/verif_form.js') }}"></script>
+
+			</body>
+		</html>
+	</body>
 </html>
