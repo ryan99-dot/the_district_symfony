@@ -60,7 +60,7 @@
 	</svg>
 	<div id="plats" class="my-1">
 		{% for plat in plats %}
-			<a href="{{ path('app_plats', {id: plat.id}) }}">
+			<a href="{{ path('app_plats') }}#plat{{ plat.id }}">
 				<img src="{{ asset('assets/images/food/' ~ plat.image) }}" alt="{{ plat.libelle }}" class="object-fit-cover" id="plat_jour{{ loop.index }}">
 			</a>
 		{% endfor %}

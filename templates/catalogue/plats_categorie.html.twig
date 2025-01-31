@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CatalogueController!{% endblock %}
+{% block title %}{{ categorie.libelle }} - The District
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div id="entete_ass"></div>
+	<div id="banniere_mobile"></div>
+</header>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% for plat in plats %}
+        <div class="plat d-flex align-items-center justify-content-between">
+        <img src="{{ asset('assets/images/food/' ~ plat.image)}}" alt="{{ plat.libelle }}" class="object-fit-cover" id="plat{{ plat.id }}">
+        <div class="tout d-flex">
+            <p class="titre_plat text-center">{{ plat.libelle }}</p>
+            <hr class="shadow">
+            <button class="chevron open border-0 bg-transparent">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="des_com flex-column align-items-center">
+                <p class="description text-center">{{ plat.description }}</p>
+                <p class="description text-center">{{ plat.prix }}</p>
+                <a href="#" class="text-decoration-none text-dark commander border-0 rounded-2 px-5">Commander</a>
+                <a href="#" class="text-decoration-none text-dark commander_mobile border-0 rounded-circle px-2">+</a>
+            </div>
+        </div>
+        <button class="chevron closed border-0 bg-transparent">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+    </div>
+{% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/grimbert/Documents/Ryan Grimbert/Projet 5 - The District Symfony/src/Controller/CatalogueController.php</code></li>
-        <li>Your template at <code>/home/grimbert/Documents/Ryan Grimbert/Projet 5 - The District Symfony/templates/catalogue/index.html.twig</code></li>
-    </ul>
-</div>
 {% endblock %}

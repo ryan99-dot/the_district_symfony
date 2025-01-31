@@ -31,11 +31,19 @@ final class CatalogueController extends AbstractController{
         ]);
     }
 
-    #[Route('/plats/{categorie.id}', name: 'app_plats_categorie')]
-    public function plats_categorie(): Response
+    #[Route('/plats/{id}', name: 'app_plats_categorie')]
+    public function plats_categorie(string $id, Request $request, PlatRepository $platRepository, CategorieRepository $categorieRepository, EntityManagerInterface $em): Response
     {
+        $categorie = $categorieRepository->find($id);
+
+        if (!$categorie) {
+            throw $this->createNotFoundException("Cette catégorie n'existe pas.");
+        }
+        $plats = $platRepository->parCategorie($id);
+
         return $this->render('catalogue/plats_categorie.html.twig', [
-            'controller_name' => 'CatalogueController',
+            'plats' => $plats,
+            'categorie' => $categorie,
         ]);
     }
 

@@ -9,7 +9,7 @@
 </header>
 {% for categorie in categories %}
 	{% if loop.index0 is divisible by(2) %}
-		<a href="{{ path('app_plats_categorie', {id: categorie.id}) }}" class="text-decoration-none">
+		<a href="{{ path('app_plats_categorie', {'id': categorie.id}) }}" class="text-decoration-none">
 			<div id="{{ categorie.libelle }}" class="categorie_l d-flex mt-5">
 				<img src="{{ asset('assets/images/category/' ~ categorie.image) }}" alt="{{ categorie.libelle }}" class="photo_cat object-fit-cover">
 				<p class="texte_cat d-flex justify-content-center align-items-center">
@@ -18,7 +18,7 @@
 			</div>
 		</a>
 	{% else %}
-		<a href="{{ path('app_plats_categorie', {id: categorie.id}) }}" class="text-decoration-none">
+		<a href="{{ path('app_plats_categorie', {'id': categorie.id}) }}" class="text-decoration-none">
 			<div id="{{ categorie.libelle }}" class="categorie_r d-flex mt-5">
 				<p class="texte_cat d-flex justify-content-center align-items-center">
 					{{ categorie.libelle }}

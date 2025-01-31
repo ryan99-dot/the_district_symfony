@@ -36,6 +36,16 @@ class PlatRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function parCategorie (int $id): array
+    {
+        return $this->createQueryBuilder('p')
+        ->where('p.categorie = :id')
+        ->setParameter('id', $id)
+        ->orderBy('p.libelle')
+        ->getQuery()
+        ->getResult();
+    }
+
 //    /**
 //     * @return Plat[] Returns an array of Plat objects
 //     */
